@@ -12,7 +12,7 @@ const allCSS = document.createElement('style')
 if( !/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
 // Cria o iframe
-container.innerHTML = `<iframe id="iframe-sininho" scrolling="no" frameborder="0" src="https://sininhoapp.bubbleapps.io/version-test/s/${id}" style="width: 400px; height: 412px; max-height: 412px !important; border: 0; border-radius: 5px; box-sizing: border-box; position: absolute !important; left: 0; top: 0; user-select: none; z-index: 999999999999999; box-shadow: 0 8px 16px rgb(0 0 0 / 18%); background-color: #FFF; opacity: 0; pointer-events: none; transition: opacity 0.3s ease 0s"></iframe>`
+container.innerHTML = `<iframe id="iframe-sininho" scrolling="no" frameborder="0" src="https://sininhoapp.bubbleapps.io/version-test/s/${id}" style="width: 400px; height: 1px; max-height: 412px !important; border: 0; border-radius: 5px; box-sizing: border-box; position: absolute !important; left: 0; top: 0; user-select: none; z-index: 999999999999999; box-shadow: 0 8px 16px rgb(0 0 0 / 18%); background-color: #FFF; pointer-events: none; transition: opacity 0.3s ease 0s, transform 0.3s ease 0s; opacity: 0; transform: translateY(-15px)"></iframe>`
 
 // Apensa o container
 scope.document.body.appendChild(container)
@@ -92,7 +92,7 @@ window.addEventListener('message', (event) => {
         botao.style.cursor = 'pointer'
         botao.appendChild(badgeDiv)
         allCSS.innerHTML = `
-        .sininho-mostrar { opacity: 1 !important; pointer-events: auto !important; }
+        .sininho-mostrar { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
         .sininho-contador { position: absolute !important; display: flex; flex-direction: column; align-items: center; justify-content: center; width: ${comprimento}; height: ${tamanho}; top: ${topo} !important; right: ${direita} !important; border-radius: ${raio}; background-color: ${fundo}; color: ${cor_fonte}; font-family: Arial !important; font-size: ${tamanho_fonte}; font-weight: normal; line-height: 1; cursor: pointer; }
         #botao-sininho *:not(#iframe-sininho, .sininho-contador) { pointer-events: none !important; }
         `
@@ -145,6 +145,9 @@ scope.document.body.appendChild(container)
 // Seleciona os elementos por ID e classe; apensa a badge no botão; apensa estilos no botão
 const iframe = document.querySelector('#' + 'iframe-sininho')
 const botao = document.getElementById('botao-sininho')
+botao.style.position = 'relative'
+botao.style.display = 'inline-block'
+botao.style.userSelect = 'none'
 badgeDiv.classList.add('sininho-contador')
 
 // [LISTENER] Apensa o número de anúncios na badge e apensa o CSS da badge
@@ -190,10 +193,7 @@ window.addEventListener('message', (event) => {
         }
 
     if (event.data.numero) {
-        botao.style.position = 'relative'
         botao.style.cursor = 'pointer'
-        botao.style.userSelect = 'none'
-        botao.style.display = 'inline-block'
         botao.appendChild(badgeDiv)
         allCSS.innerHTML = `
         .sininho-mostrar { opacity: 1 !important; pointer-events: auto !important; }
